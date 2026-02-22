@@ -8,7 +8,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { useToast } from '@/components/ui/use-toast';
 import { Trash2 } from 'lucide-react';
 
-type Category = { _id: string; name: string; slug: string };
+type Category = { _id: string | { toString(): string }; name: string; slug: string };
 
 export default function AdminCategoriesPage() {
   const [categories, setCategories] = useState<Category[]>([]);
@@ -93,9 +93,9 @@ export default function AdminCategoriesPage() {
       </Card>
       <ul className="space-y-2">
         {categories.map((c) => (
-          <li key={c._id} className="flex items-center justify-between py-2 border-b">
+          <li key={String(c._id)} className="flex items-center justify-between py-2 border-b">
             <span>{c.name}</span>
-            <Button size="sm" variant="ghost" onClick={() => deleteCategory(c._id)}>
+            <Button size="sm" variant="ghost" onClick={() => deleteCategory(String(c._id))}>
               <Trash2 className="h-4 w-4 text-destructive" />
             </Button>
           </li>

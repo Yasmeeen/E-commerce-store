@@ -16,7 +16,7 @@ import {
 type OrderStatus = 'pending' | 'confirmed' | 'shipped' | 'delivered' | 'cancelled';
 
 type Order = {
-  _id: string;
+  _id: string | { toString(): string };
   orderNumber: string;
   customer: { name: string; email: string; phone: string; address: string };
   total: number;
@@ -86,7 +86,7 @@ export default function AdminOrdersPage() {
       </div>
       <div className="space-y-4">
         {orders.map((order) => (
-          <Card key={order._id}>
+          <Card key={String(order._id)}>
             <CardContent className="p-4 flex flex-wrap items-center justify-between gap-4">
               <div>
                 <p className="font-medium">{order.orderNumber}</p>
@@ -97,7 +97,7 @@ export default function AdminOrdersPage() {
                 <span className="text-sm capitalize px-2 py-1 rounded bg-muted">{order.status}</span>
                 <Select
                   value={order.status}
-                  onValueChange={(v) => updateStatus(order._id, v as OrderStatus)}
+                  onValueChange={(v) => updateStatus(String(order._id), v as OrderStatus)}
                 >
                   <SelectTrigger className="w-36">
                     <SelectValue />

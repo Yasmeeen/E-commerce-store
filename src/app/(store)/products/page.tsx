@@ -34,8 +34,8 @@ export default async function ProductsPage({
       <h1 className="text-2xl font-semibold mb-6">Products</h1>
       <ProductFilters categories={categories} />
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mt-6">
-        {products.map((product: { _id: string; name: string; slug: string; price: number; images?: string[] }) => (
-          <Card key={product._id} className="overflow-hidden">
+        {products.map((product) => (
+          <Card key={String(product._id)} className="overflow-hidden">
             <Link href={`/products/${product.slug}`}>
               <div className="aspect-square relative bg-muted">
                 {product.images?.[0] ? (

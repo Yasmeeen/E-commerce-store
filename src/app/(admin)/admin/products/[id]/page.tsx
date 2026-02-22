@@ -16,7 +16,7 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 
-type Category = { _id: string; name: string; slug: string };
+type Category = { _id: string | { toString(): string }; name: string; slug: string };
 
 export default function EditProductPage() {
   const router = useRouter();
@@ -157,7 +157,7 @@ export default function EditProductPage() {
                 <SelectContent>
                   <SelectItem value="__none__">None</SelectItem>
                   {categories.map((c) => (
-                    <SelectItem key={c._id} value={c._id}>{c.name}</SelectItem>
+                    <SelectItem key={String(c._id)} value={String(c._id)}>{c.name}</SelectItem>
                   ))}
                 </SelectContent>
               </Select>

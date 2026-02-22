@@ -10,7 +10,7 @@ import { useToast } from '@/components/ui/use-toast';
 import { Plus, Pencil, Trash2 } from 'lucide-react';
 
 type Product = {
-  _id: string;
+  _id: string | { toString(): string };
   name: string;
   slug: string;
   price: number;
@@ -64,7 +64,7 @@ export default function AdminProductsPage() {
       </div>
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {products.map((p) => (
-          <Card key={p._id} className="overflow-hidden">
+          <Card key={String(p._id)} className="overflow-hidden">
             <div className="aspect-square relative bg-muted">
               {p.images?.[0] ? (
                 <Image src={p.images[0]} alt={p.name} fill className="object-cover" sizes="200px" />
@@ -77,11 +77,11 @@ export default function AdminProductsPage() {
               <p className="text-primary font-semibold">{formatPrice(p.price)}</p>
               <div className="flex gap-2 mt-2">
                 <Button asChild size="sm" variant="outline">
-                  <Link href={`/admin/products/${p._id}`}>
+                  <Link href={`/admin/products/${String(p._id)}`}>
                     <Pencil className="h-3 w-3 mr-1" /> Edit
                   </Link>
                 </Button>
-                <Button size="sm" variant="destructive" onClick={() => deleteProduct(p._id)}>
+                <Button size="sm" variant="destructive" onClick={() => deleteProduct(String(p._id))}>
                   <Trash2 className="h-3 w-3" />
                 </Button>
               </div>

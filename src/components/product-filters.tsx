@@ -4,7 +4,7 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 
-type Category = { _id: string; name: string; slug: string };
+type Category = { _id: string | { toString(): string }; name: string; slug: string };
 
 export function ProductFilters({ categories }: { categories: Category[] }) {
   const router = useRouter();
@@ -45,7 +45,7 @@ export function ProductFilters({ categories }: { categories: Category[] }) {
         >
           <option value="">All</option>
           {categories.map((c) => (
-            <option key={c._id} value={c._id}>{c.name}</option>
+            <option key={String(c._id)} value={String(c._id)}>{c.name}</option>
           ))}
         </select>
       </div>
