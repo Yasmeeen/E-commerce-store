@@ -16,7 +16,7 @@ export default async function HomePage() {
     getProducts({ featured: true }),
   ]);
 
-  const hasHeroMedia = config.heroMediaType && config.heroMediaUrl;
+  const hasHeroMedia = config?.heroMediaType && config?.heroMediaUrl;
 
   return (
     <div>
@@ -25,20 +25,20 @@ export default async function HomePage() {
           hasHeroMedia ? '' : 'bg-muted/50'
         }`}
       >
-        {hasHeroMedia && config.heroMediaType === 'video' && (
+        {hasHeroMedia && config?.heroMediaType === 'video' && (
           <video
             autoPlay
             muted
             loop
             playsInline
             className="absolute inset-0 w-full h-full object-cover"
-            src={config.heroMediaUrl}
+            src={config.heroMediaUrl!}
             aria-hidden
           />
         )}
-        {hasHeroMedia && config.heroMediaType === 'image' && (
+        {hasHeroMedia && config?.heroMediaType === 'image' && (
           <img
-            src={config.heroMediaUrl}
+            src={config.heroMediaUrl!}
             alt=""
             className="absolute inset-0 w-full h-full object-cover"
             aria-hidden
@@ -52,7 +52,7 @@ export default async function HomePage() {
                 hasHeroMedia ? 'text-white drop-shadow-md' : ''
               }`}
             >
-              Welcome to {config.storeName}
+              Welcome to {config?.storeName ?? 'Store'}
             </h1>
             <p
               className={`mt-4 text-lg ${
