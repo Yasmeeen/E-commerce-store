@@ -167,7 +167,7 @@ async function seedProducts() {
     await mongoose.connect(MONGODB_URI);
     console.log('Connected to MongoDB');
 
-    const categoryNames = [...new Set(DUMMY_PRODUCTS.map((p) => p.category))];
+    const categoryNames = Array.from(new Set(DUMMY_PRODUCTS.map((p) => p.category)));
     const categoryMap: Record<string, mongoose.Types.ObjectId> = {};
 
     for (const name of categoryNames) {
