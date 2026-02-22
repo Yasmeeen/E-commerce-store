@@ -72,8 +72,8 @@ export default async function HomePage() {
         <section className="container mx-auto px-4 py-12">
           <h2 className="text-2xl font-semibold mb-6">Featured Products</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-            {featuredProducts.map((product: { _id: string; name: string; slug: string; price: number; images?: string[] }) => (
-              <Card key={product._id} className="overflow-hidden">
+            {featuredProducts.map((product) => (
+              <Card key={String(product._id)} className="overflow-hidden">
                 <Link href={`/products/${product.slug}`}>
                   <div className="aspect-square relative bg-muted">
                     {product.images?.[0] ? (
